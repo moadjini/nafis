@@ -1,0 +1,161 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* -----------------------------------------------------------------------------
+   Nafis design tokens — white and green.
+   Edit these variables to update the palette everywhere.
+   Accessibility note: white text on #16A34A is ~3.3:1, below WCAG AA for
+   body-size text, so filled buttons and green text use --primary-strong
+   (#15803D, ~5.0:1). #16A34A is used for icons, indicators, rings and fills.
+   ----------------------------------------------------------------------------- */
+:root {
+  --green-600: #16a34a;
+  --green-700: #15803d;
+  --green-800: #166534;
+  --green-100: #dcfce7;
+  --green-50: #f0fdf4;
+
+  --background: #ffffff;
+  --background-secondary: #f7fcf8;
+  --surface: #ffffff;
+  --foreground: #17231b;
+  --muted-foreground: #647067;
+  --border: #e4eee6;
+  --muted: #f3f6f3;
+
+  --primary: var(--green-600);
+  --primary-strong: var(--green-700);
+  --primary-hover: var(--green-800);
+  --primary-foreground: #ffffff;
+  --primary-soft: var(--green-100);
+  --primary-faint: var(--green-50);
+  --primary-text: var(--green-700);
+
+  --destructive: #b42318;
+  --destructive-hover: #912018;
+  --destructive-soft: #fef3f2;
+  --destructive-foreground: #ffffff;
+
+  --ring: var(--green-600);
+  --verified: #1d9bf0;
+  /* Chart marks: validated against both surfaces (dataviz validator). */
+  --chart-mark: #16a34a;
+  --chart-grid: #e4eee6;
+  --shadow-color: 22 101 52;
+  --radius: 1rem;
+}
+
+.dark {
+  --background: #0e1711;
+  --background-secondary: #121e16;
+  --surface: #15221a;
+  --foreground: #e6f0e8;
+  --muted-foreground: #9db3a3;
+  --border: #243829;
+  --muted: #1a2a20;
+
+  --primary: #22c55e;
+  --primary-strong: #15803d;
+  --primary-hover: #16a34a;
+  --primary-foreground: #ffffff;
+  --primary-soft: #173b25;
+  --primary-faint: #13281b;
+  --primary-text: #6ee7a0;
+
+  --destructive: #f97066;
+  --destructive-hover: #fda29b;
+  --destructive-soft: #3a1a17;
+  --destructive-foreground: #1a0b09;
+
+  --ring: #4ade80;
+  --verified: #1d9bf0;
+  --chart-mark: #16a34a;
+  --chart-grid: #243829;
+  --shadow-color: 0 0 0;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-background-secondary: var(--background-secondary);
+  --color-surface: var(--surface);
+  --color-foreground: var(--foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-muted: var(--muted);
+  --color-primary: var(--primary);
+  --color-primary-strong: var(--primary-strong);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-soft: var(--primary-soft);
+  --color-primary-faint: var(--primary-faint);
+  --color-primary-text: var(--primary-text);
+  --color-destructive: var(--destructive);
+  --color-destructive-hover: var(--destructive-hover);
+  --color-destructive-soft: var(--destructive-soft);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-ring: var(--ring);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-sm: calc(var(--radius) - 0.5rem);
+  --radius-md: calc(var(--radius) - 0.25rem);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 0.25rem);
+  --radius-2xl: calc(var(--radius) + 0.5rem);
+
+  --shadow-soft: 0 1px 2px rgb(var(--shadow-color) / 0.04), 0 4px 16px rgb(var(--shadow-color) / 0.06);
+  --shadow-float: 0 4px 12px rgb(var(--shadow-color) / 0.08), 0 12px 32px rgb(var(--shadow-color) / 0.1);
+
+  --animate-pulse-soft: pulse-soft 1.6s ease-in-out infinite;
+  @keyframes pulse-soft {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.55; transform: scale(0.92); }
+  }
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-feature-settings: "cv11", "ss01";
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: var(--primary-soft);
+    color: var(--foreground);
+  }
+
+  /* Keep reading comfortable for long posts. */
+  .prose-nafis {
+    line-height: 1.7;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
